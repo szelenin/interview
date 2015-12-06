@@ -16,12 +16,12 @@ public class Task6 {
         for (int i = j; i < n - 1 - j; i++) {
             int ul = image[j][i];
             int ur = image[i][n-1-j];
-            int lr = image[n-1-j][n-1-j-i];
-            int ll = image[n-1-j-i][j];
+            int lr = image[n-1-j][n-1-i];
+            int ll = image[n-1-i][j];
             image[j][i]=ll;
             image[i][n-1-j]=ul;
-            image[n-1-j][n-1-j-i]=ur;
-            image[n-1-j-i][j]=lr;
+            image[n-1-j][n-1-i]=ur;
+            image[n-1-i][j]=lr;
         }
 
     }
