@@ -9,7 +9,7 @@ public class Task4 {
         Pair left = new Pair();
         Pair right = new Pair();
         Node current = head;
-        while (current.next != null) {
+        while (current != null) {
             Pair active = right;
             if (current.data < x) {
                 active = left;
@@ -32,6 +32,7 @@ public class Task4 {
             return left.head;
         }
         left.tail.next = right.head;
+        right.tail.next = null;
         return left.head;
     }
 }
