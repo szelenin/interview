@@ -5,13 +5,13 @@ package linkedLists;
  */
 public class Task5 {
     public static Node plus(Node xNode, Node yNode) {
-        return plus(xNode, yNode, 1);
+        return plus(xNode, yNode, 0);
     }
 
-    public static Node plus(Node xNode, Node yNode, int pow){
+    public static Node plus(Node xNode, Node yNode, int remaining){
         Node xNext = null, yNext = null;
         int x = 0, y = 0;
-        if (xNode == null && yNode == null) return null;
+        if (xNode == null && yNode == null) return remaining > 0 ? new Node(remaining) : null;
         if (xNode != null){
             xNext = xNode.next;
             x = xNode.data;
@@ -20,6 +20,6 @@ public class Task5 {
             yNext = yNode.next;
             y = yNode.data;
         }
-        return new Node((x+y)*pow, plus(xNext, yNext, pow * 10));
+        return new Node((x+y+remaining)%10, plus(xNext, yNext,  (x + y + remaining) / 10));
     }
 }
