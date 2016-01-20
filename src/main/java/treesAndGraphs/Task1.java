@@ -10,17 +10,17 @@ public class Task1 {
         }
         Result left = isBalanced(node.left);
         Result right = isBalanced(node.right);
-        return new Result(left.len + right.len + 1,
-                Math.abs(left.len - right.len) < 2 &&
+        return new Result(Math.max(left.height, right.height) + 1,
+                Math.abs(left.height - right.height) < 2 &&
                         left.balanced && right.balanced);
     }
 
     public static class Result {
-        int len;
+        int height;
         boolean balanced;
 
-        public Result(int len, boolean balanced) {
-            this.len = len;
+        public Result(int height, boolean balanced) {
+            this.height = height;
             this.balanced = balanced;
         }
     }

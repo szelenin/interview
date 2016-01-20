@@ -26,6 +26,6 @@ public class Task3 {
     }
 
     private static int middle(int start, int end) {
-        return (end - start) / 2 + (end - start) % 2;
+        return (end + start) / 2 + (end + start) % 2;
     }
 }
