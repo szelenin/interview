@@ -44,4 +44,9 @@ public class TreeTraverse {
         }
         path+=current;
     }
+
+    @Override
+    public String toString() {
+        return path;
+    }
 }
