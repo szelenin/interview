@@ -5,33 +5,18 @@ package treesAndGraphs;
  */
 public class Task5 {
     public static boolean isBst(TreeNode root) {
-        return traverse(root).isBst;
+        return isBst(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
-    private static Result traverse(TreeNode node) {
+    private static boolean isBst(TreeNode node, int min, int max) {
         if (node == null) {
-            return new Result(Integer.MIN_VALUE, Integer.MAX_VALUE, true);
+            return true;
         }
-        Result left = traverse(node.left);
-        if (left.max > node.value()) {
-            return new Result(Integer.MAX_VALUE, Integer.MIN_VALUE, false);
+        if (node.value() <= min || node.value() > max) {
+            return false;
         }
-        Result right = traverse(node.right);
-        if (right.min <= node.value()) {
-            return new Result(Integer.MAX_VALUE, Integer.MIN_VALUE, false);
-        }
-        return new Result(Math.max(right.max, Math.max(node.value(), left.max)), Math.min(left.min, Math.min(node.value(), right.min)), true);
+        return isBst(node.left, min, node.value()) && isBst(node.right, node.value(), max);
     }
 
-    private static class Result {
-        int min;
-        int max;
-        boolean isBst;
 
-        public Result(int min, int max, boolean isBst) {
-            this.min = min;
-            this.max = max;
-            this.isBst = isBst;
-        }
-    }
 }
