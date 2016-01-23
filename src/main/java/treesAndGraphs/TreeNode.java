@@ -18,4 +18,8 @@ public class TreeNode {
     public String toString() {
         return name;
     }
+
+    public int value() {
+        return Integer.parseInt(name);
+    }
 }
