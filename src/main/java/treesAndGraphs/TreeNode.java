@@ -7,6 +7,7 @@ public class TreeNode {
     public TreeNode left;
     public TreeNode right;
     public String name;
+    public TreeNode parent;
 
     public TreeNode(TreeNode left, TreeNode right, String name) {
         this.left = left;
