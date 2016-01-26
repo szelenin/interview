@@ -8,6 +8,10 @@ public class Task7 {
         if (n1 == null || n2 == null) {
             return null;
         }
+        if (isParent(n1, n2)) {
+            return n1.parent;
+        }
+
         TreeNode current = n1;
         while (current.parent != null) {
             if (current.parent == n2.parent) {
@@ -20,6 +24,17 @@ public class Task7 {
             current = current.parent;
         }
         return null;
+    }
+
+    private static boolean isParent(TreeNode parent, TreeNode node) {
+        TreeNode current = node;
+        while (current != null) {
+            if (current == parent) {
+                return true;
+            }
+            current = current.parent;
+        }
+        return false;
     }
 
     private static boolean search(TreeNode node, TreeNode toFind) {
