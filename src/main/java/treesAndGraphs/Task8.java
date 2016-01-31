@@ -34,4 +34,17 @@ public class Task8 {
         }
         return n1.value() == n2.value() && treesEqual(n1.left, n2.left) && treesEqual(n1.left, n2.left);
     }
+
+    public static boolean isSubtree2(TreeNode root1, TreeNode root2) {
+        if (root2 == null) {
+            return true;
+        }
+        if (root1 == null) {
+            return false;
+        }
+        if (treesEqual(root1, root2)) {
+            return true;
+        }
+        return isSubtree2(root1.left, root2) || isSubtree2(root1.left, root2);
+    }
 }
