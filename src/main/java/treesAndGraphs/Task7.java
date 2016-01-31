@@ -46,4 +46,34 @@ public class Task7 {
         }
         return search(node.left, toFind) || search(node.right, toFind);
     }
+
+    /* The below code has a bug. */
+    public static TreeNode commonAncestorBad(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) {
+            return null;
+        }
+        if (root == p && root == q) {
+            return root;
+        }
+
+        TreeNode x = commonAncestorBad(root.left, p, q);
+        if (x != null && x != p && x != q) { // Already found ancestor
+            return x;
+        }
+
+        TreeNode y = commonAncestorBad(root.right, p, q);
+        if (y != null && y != p && y != q) { // Already found ancestor
+            return y;
+        }
+
+
+        if (x != null && y != null) { // p and q found in diff. subtrees
+            return root; // This is the common ancestor
+        } else if (root == p || root == q) {
+            return root;
+        } else {
+             /* If either x or y is non-null, return the non-null value */
+            return x == null ? y : x;
+        }
+    }
 }
