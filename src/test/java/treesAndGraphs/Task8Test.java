@@ -20,6 +20,7 @@ public class Task8Test {
         assertTrue(Task8.isSubtree(one, three));
         assertTrue(Task8.isSubtree(one, new TreeNode(new TreeNode(7), new TreeNode(4), "3")));
         assertFalse(Task8.isSubtree(one, new TreeNode(new TreeNode(4), new TreeNode(7), "3")));
+        assertFalse(Task8.isSubtree(one, new TreeNode(new TreeNode(3), null, "2")));
     }
 
 }

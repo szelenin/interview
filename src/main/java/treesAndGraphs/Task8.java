@@ -15,8 +15,12 @@ public class Task8 {
             if (treesEqual(node, root2)) {
                 return true;
             }
-            queue.add(node.left);
-            queue.add(node.right);
+            if (node.left != null) {
+                queue.add(node.left);
+            }
+            if (node.right != null) {
+                queue.add(node.right);
+            }
         }
         return false;
     }
