@@ -20,6 +20,10 @@ public class Task9Test {
 
         Set<String> paths = Task9.paths(one, 6);
         assertEquals(4, paths.size());
+        assertTrue(paths.contains("24"));
+        assertTrue(paths.contains("11211"));
+        assertTrue(paths.contains("12111"));
+        assertTrue(paths.contains("21111"));
     }
 
     private TreeNode build(int[] branches, int index) {
