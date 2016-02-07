@@ -28,11 +28,12 @@ public class BmTask8 {
             a[currentIdx] = drawPx(a[currentIdx], startBit, bitLen);
             currentIdx++;
             lineLength-=bitLen;
+            startBit = 0;
         }
         return a;
     }
 
     private static byte drawPx(byte a, int startBit, int len) {
-        return (byte) (a | 0xff >> startBit & 0xff << (8 - len));
+        return (byte) (a | 0xff >> startBit & 0xff << (8 - len - startBit));
     }
 }
