@@ -28,7 +28,9 @@ public class Recursion {
             } else if (bst.value() > x) {
                 bst = bst.left;
             } else {
-                return find_val_or_next_smallest(bst.right, x, right_best == null ? bst.value() : right_best);
+                right_best = right_best == null ? bst.value() : right_best;
+                bst = bst.right;
+                continue;
             }
         }
     }
