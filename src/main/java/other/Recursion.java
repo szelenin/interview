@@ -5,9 +5,12 @@ package other;
  */
 public class Recursion {
     public static int factorial(int n, int acc) {
-        if (n < 2) {
-            return n * acc;
+        while (true) {
+            if (n < 2) {
+                return n * acc;
+            }
+            acc = acc * n;
+            n = n - 1;
         }
-        return factorial(n - 1, n * acc);
     }
 }
