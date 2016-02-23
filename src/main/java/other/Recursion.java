@@ -16,23 +16,19 @@ public class Recursion {
         }
     }
 
-    public static Integer find_val_or_next_smallest(TreeNode bst, int x) {
+    public static Integer find_val_or_next_smallest(TreeNode bst, int x, Integer right_best) {
         //Get the greatest value <= x in a binary search tree.
         //Returns None if no such value can be found.
         while (true) {
 
             if (bst == null) {
-                return null;
+                return right_best;
             } else if (bst.value() == x) {
                 return x;
             } else if (bst.value() > x) {
                 bst = bst.left;
             } else {
-                Integer right_best = find_val_or_next_smallest(bst.right, x);
-                if (right_best == null) {
-                    return bst.value();
-                }
-                return right_best;
+                return find_val_or_next_smallest(bst.right, x, right_best == null ? bst.value() : right_best);
             }
         }
     }
