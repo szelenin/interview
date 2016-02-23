@@ -29,19 +29,91 @@ public class RdpTask6 {
         }
     }
 
-    public static void addParent(List<String> result, char[] str, int leftRem, int rightRem, int idx) {
+    public static void addParent(List<String> result, char[] str, int leftRem, int rightRem, int idx, int retPoint) {
+        System.out.println("current:" + new Frame(leftRem, rightRem, idx, retPoint));
         if (leftRem == 0 && rightRem == 0) {
             result.add(String.copyValueOf(str));
             return;
         }
         if (leftRem > 0) {
             str[idx] = '(';
-            addParent(result, str, leftRem - 1, rightRem, idx + 1);
+            System.out.println("stack  :" + new Frame(leftRem, rightRem, idx, 1));
+            addParent(result, str, leftRem - 1, rightRem, idx + 1, 1);
         }
         if (rightRem > leftRem) {
             str[idx] = ')';
-            addParent(result, str, leftRem, rightRem - 1, idx + 1);
+            System.out.println("stack:  " + new Frame(leftRem, rightRem, idx, 2));
+            addParent(result, str, leftRem, rightRem - 1, idx + 1, 2);
         }
+        System.out.println("end");
+    }
+
+    private static class Frame {
+        int leftRem;
+        int rightRem;
+        int idx;
+        int retPoint;
+
+        public Frame(int leftRem, int rightRem, int idx, int retPoint) {
+            this.leftRem = leftRem;
+            this.rightRem = rightRem;
+            this.idx = idx;
+            this.retPoint = retPoint;
+        }
+
+        @Override
+        public String toString() {
+            return "Frame{" +
+                    "leftRem=" + leftRem +
+                    ", rightRem=" + rightRem +
+                    ", idx=" + idx +
+                    ", retPoint=" + retPoint +
+                    '}';
+        }
+    }
+
+    public static void addParentIter(List<String> result, char[] str, int leftRem, int rightRem, int idx, int count) {
+        Stack<Frame> stack = new Stack<>();
+        Frame frame = new Frame(leftRem, rightRem, idx, 0);
+        stack.push(frame);
+        leftRem = frame.leftRem;
+        rightRem = frame.rightRem;
+        idx = frame.idx;
+        while (!stack.isEmpty() ) {
+            System.out.println("current:"+new Frame(leftRem, rightRem, idx, frame.retPoint));
+            if (leftRem == 0 && rightRem == 0) {
+                result.add(String.copyValueOf(str));
+                frame = stack.pop();
+                leftRem = frame.leftRem;
+                rightRem = frame.rightRem;
+                idx = frame.idx;
+                continue;
+            }
+            if (leftRem > 0 && frame.retPoint < 1) {
+                str[idx] = '(';
+                System.out.println("stack  :"+new Frame(leftRem, rightRem, idx, 1));
+                stack.push(new Frame(leftRem, rightRem, idx, 1));
+                leftRem --;
+                idx ++;
+                continue;
+//                addParent(result, str, leftRem - 1, rightRem, idx + 1);
+            }
+            if (rightRem > leftRem && frame.retPoint < 2) {
+                str[idx] = ')';
+                System.out.println("stack  :"+new Frame(leftRem, rightRem, idx, 2));
+                stack.push(new Frame(leftRem, rightRem, idx, 2));
+//            addParent(result, str, leftRem, rightRem - 1, idx + 1);
+                rightRem--;
+                idx++;
+                continue;
+            }
+            System.out.println("end");
+            frame = stack.pop();
+            leftRem = frame.leftRem;
+            rightRem = frame.rightRem;
+            idx = frame.idx;
+        }
+
     }
 
 /*
@@ -99,7 +171,8 @@ public class RdpTask6 {
 
     public static List<String> addParent(int count) {
         ArrayList<String> result = new ArrayList<>();
-        addParent(result, new char[count * 2], count, count, 0);
+//        addParentIter(result, new char[count * 2], count, count, 0, count);
+        addParentIter(result, new char[count * 2], count, count, 0, 0);
         return result;
 //        return addParentIter(count);
     }

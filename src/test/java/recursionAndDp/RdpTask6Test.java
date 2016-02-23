@@ -12,8 +12,7 @@ import static org.junit.Assert.*;
 public class RdpTask6Test {
     @Test
     public void should(){
-        List<String> strings = RdpTask6.addParent(3);
-        System.out.println("strings = " + strings);
+        assertEquals("[((())), (()()), (())(), ()(()), ()()()]", RdpTask6.addParent(3).toString());
     }
 
 }
