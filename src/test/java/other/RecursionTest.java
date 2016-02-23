@@ -31,7 +31,7 @@ public class RecursionTest {
                 Arrays.asList(), Arrays.<Integer>asList(5), Arrays.<Integer>asList(3, 5), Arrays.<Integer>asList(3, 5, 9), Arrays.<Integer>asList(1, 3, 5, 9));
         for (int i = 0; i < trees.length; i++) {
             for (int x = 0; x <= 10; x++) {
-                Integer y = Recursion.find_val_or_next_smallest(trees[i], x, null);
+                Integer y = Recursion.find_val_or_next_smallest(trees[i], x);
                 int[] xArr = {x};
                 if (y == null) {
                     assert tree_vals.get(i).stream().allMatch((z) -> xArr[0] < z);
