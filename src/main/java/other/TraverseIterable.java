@@ -10,24 +10,23 @@ import java.util.Stack;
 public class TraverseIterable {
     public String path = "";
 
-    public Stack<TreeNode> step(Stack<TreeNode> parents) {
+    public Stack<TreeNode> step(Stack<TreeNode> parents, boolean right) {
         TreeNode node = parents.pop();
         path += node.name;
-        inOrder(node.right);
+        if (!right) {
+            inOrder(node.right);
+        }
         return parents;
     }
 
     public void inOrder(TreeNode node) {
-        if (node == null) {
-            return;
-        }
         Stack<TreeNode> parents = new Stack<>();
         while (node != null) {
             parents.push(node);
             node = node.left;
         }
         while (!parents.isEmpty()) {
-            parents = step(parents);
+            parents = step(parents, false);
         }
     }
 }
