@@ -10,11 +10,8 @@ import java.util.Stack;
 public class TraverseIterable {
     public String path = "";
 
-    public Stack<TreeNode> step(Stack<TreeNode> parents, boolean left) {
+    public Stack<TreeNode> step(Stack<TreeNode> parents) {
         TreeNode node = parents.pop();
-        if (!left) {
-            inOrder(node.left);
-        }
         path += node.name;
         inOrder(node.right);
         return parents;
@@ -30,7 +27,7 @@ public class TraverseIterable {
             node = node.left;
         }
         while (!parents.isEmpty()) {
-            parents = step(parents, true);
+            parents = step(parents);
         }
     }
 }
