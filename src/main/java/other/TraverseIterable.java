@@ -14,7 +14,15 @@ public class TraverseIterable {
         TreeNode node = parents.pop();
         path += node.name;
         if (!right) {
-            inOrder(node.right);
+            Stack<TreeNode> parents1 = new Stack<>();
+            TreeNode node1 = node.right;
+            while (node1 != null) {
+                parents1.push(node1);
+                node1 = node1.left;
+            }
+            while (!parents1.isEmpty()) {
+                parents1 = step(parents1, false);
+            }
         }
         return parents;
     }
@@ -27,6 +35,17 @@ public class TraverseIterable {
         }
         while (!parents.isEmpty()) {
             parents = step(parents, false);
+        }
+    }
+
+    public void inOrder1(TreeNode node1) {
+        Stack<TreeNode> parents1 = new Stack<>();
+        while (node1 != null) {
+            parents1.push(node1);
+            node1 = node1.left;
+        }
+        while (!parents1.isEmpty()) {
+            parents1 = step(parents1, false);
         }
     }
 }
