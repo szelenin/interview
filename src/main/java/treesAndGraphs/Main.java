@@ -9,7 +9,7 @@ public class Main {
 //        TreeNode node = new TreeNode(1,  null, null);
 //        inOrder(node);
         TreeNode node = new TreeNode(1, new TreeNode(2, null, null), new TreeNode(3, null, null));
-        inOrder(node);
+        inOrder2(node);
     }
 
     public static class TreeNode {
@@ -45,10 +45,12 @@ public class Main {
         } while (!stack.isEmpty());
     }
 
-//    inOrder(TreeNode node){
-//        check for null
-//        inOrder(node.left)
-//        visit node
-//        inOrder(node.right)
-//    }
+    public static void inOrder2(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        inOrder2(node.left);
+        System.out.println("node = " + node);
+        inOrder2(node.right);
+    }
 }
