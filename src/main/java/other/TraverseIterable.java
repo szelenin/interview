@@ -12,20 +12,19 @@ public class TraverseIterable {
 
     public void inOrder(TreeNode node) {
         Stack<TreeNode> parents = new Stack<>();
-        while (node != null) {
-            parents.push(node);
-            node = node.left;
-        }
+        traverseLeft(node, parents);
         while (!parents.isEmpty()) {
             node = parents.pop();
             path += node.name;
-            //--begin partial evaluation --
             node = node.right;
-            while (node != null) {
-                parents.push(node);
-                node = node.left;
-            }
-            //--end partial evaluation --
+            traverseLeft(node, parents);
+        }
+    }
+
+    private void traverseLeft(TreeNode node, Stack<TreeNode> parents) {
+        while (node != null) {
+            parents.push(node);
+            node = node.left;
         }
     }
 
