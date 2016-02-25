@@ -10,19 +10,6 @@ import java.util.Stack;
 public class TraverseIterable {
     public String path = "";
 
-    public Stack<TreeNode> step(Stack<TreeNode> parents) {
-        TreeNode node = parents.pop();
-        path += node.name;
-        //--begin partial evaluation --
-        node = node.right;
-        while (node != null) {
-            parents.push(node);
-            node = node.left;
-        }
-        //--end partial evaluation --
-        return parents;
-    }
-
     public void inOrder(TreeNode node) {
         Stack<TreeNode> parents = new Stack<>();
         while (node != null) {
@@ -30,7 +17,15 @@ public class TraverseIterable {
             node = node.left;
         }
         while (!parents.isEmpty()) {
-            parents = step(parents);
+            node = parents.pop();
+            path += node.name;
+            //--begin partial evaluation --
+            node = node.right;
+            while (node != null) {
+                parents.push(node);
+                node = node.left;
+            }
+            //--end partial evaluation --
         }
     }
 
