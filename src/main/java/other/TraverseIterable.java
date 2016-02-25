@@ -14,14 +14,12 @@ public class TraverseIterable {
         TreeNode node = parents.pop();
         path += node.name;
         //--begin partial evaluation --
-        Stack<TreeNode> parents1 = new Stack<>();
-        TreeNode node1 = node.right;
-        while (node1 != null) {
-            parents1.push(node1);
-            node1 = node1.left;
+        node = node.right;
+        while (node != null) {
+            parents.push(node);
+            node = node.left;
         }
         //--end partial evaluation --
-        parents.addAll(parents1);
         return parents;
     }
 
