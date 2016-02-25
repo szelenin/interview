@@ -24,8 +24,13 @@ public class TraverseIterable {
         if (node == null) {
             return;
         }
-        Stack<TreeNode> nodes = new Stack<>();
-        nodes.push(node);
-        step(nodes, false);
+        Stack<TreeNode> parents = new Stack<>();
+        while (node != null) {
+            parents.push(node);
+            node = node.left;
+        }
+        while (!parents.isEmpty()) {
+            parents = step(parents, true);
+        }
     }
 }
