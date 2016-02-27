@@ -9,23 +9,29 @@ import java.util.Stack;
  */
 public class TraverseIterable {
     public String path = "";
-
     public void inOrder(TreeNode node) {
-        Stack<TreeNode> parents = new Stack<>();
-        traverseLeft(node, parents);
-        while (!parents.isEmpty()) {
-            node = parents.pop();
-            path += node.name;
-            node = node.right;
-            traverseLeft(node, parents);
-        }
+        this.path = inOrderValue(node);
     }
 
-    private void traverseLeft(TreeNode node, Stack<TreeNode> parents) {
-        while (node != null) {
-            parents.push(node);
-            node = node.left;
+    private Object[] step(Stack<TreeNode> parents, String left) {
+        TreeNode node = parents.pop();
+        if (left == null) {
+            left = inOrderValue(node.left);
         }
+        left += node;
+        left += inOrderValue(node.right);
+
+        return new Object[]{parents, left};
     }
+
+    public String inOrderValue(TreeNode node) {
+        if (node == null) {
+            return "";
+        }
+        Stack<TreeNode> parents = new Stack<>();
+        parents.push(node);
+        return (String) step(parents, null)[1];
+    }
+
 
 }
