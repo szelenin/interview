@@ -1,5 +1,7 @@
 package recursionAndDp;
 
+import java.util.Stack;
+
 /**
  * Created by szelenin on 2/27/2016.
  */
@@ -24,26 +26,34 @@ public class RdpTask8 {
         return makeChange(n, 25);
     }
     private static int makeChange(int total, int denom) {
-        int nextCoin = 0;
-        switch (denom) {
-            case 25:
-                nextCoin = 10;
-                break;
-            case 10:
-                nextCoin = 5;
-                break;
-            case 5:
-                nextCoin = 1;
-                break;
-            case 1:
-                return 1; // Found a combination.Base case.
-            default:
-                return 0;
-        }
-
+        Stack stack = new Stack();
+        stack.push(new Object[]{total, denom});
         int ways = 0;
-        for (int count = 0; count*denom <= total; ++count) {
-            ways += makeChange(total-count*denom, nextCoin);
+        while (!stack.isEmpty()) {
+            Object[] pop = (Object[]) stack.pop();
+            total = (int) pop[0];
+            denom = (int) pop[1];
+            int nextCoin = 0;
+            switch (denom) {
+                case 25:
+                    nextCoin = 10;
+                    break;
+                case 10:
+                    nextCoin = 5;
+                    break;
+                case 5:
+                    nextCoin = 1;
+                    break;
+                case 1:
+                    ways ++;
+                    continue; // Found a combination.Base case.
+                default:
+                    continue;
+            }
+
+            for (int count = 0; count*denom <= total; ++count) {
+                stack.push(new Object[]{total - count * denom, nextCoin});
+            }
         }
         return ways;
     }

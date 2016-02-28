@@ -10,8 +10,15 @@ import static org.junit.Assert.*;
 public class RdpTask8Test {
     @Test
     public void shouldNumWays(){
-        System.out.println("RdpTask8.numWays(100) = " + RdpTask8.numWays(100));
-        System.out.println("RdpTask8.numWays(100) = " + RdpTask8.numWaysBook(10000));
+        assertEquals(2, RdpTask8.numWaysBook(6));
+        assertEquals(242, RdpTask8.numWays(100));
+        assertEquals(242, RdpTask8.numWaysBook(100));
+        long start = System.currentTimeMillis();
+        System.out.println("RdpTask8.numWays(100) = " + RdpTask8.numWays(26));
+        System.out.println(System.currentTimeMillis() - start);
+        start = System.currentTimeMillis();
+        System.out.println("RdpTask8.numWays(100) = " + RdpTask8.numWaysBook(26));
+        System.out.println(System.currentTimeMillis() - start);
     }
 
 }
