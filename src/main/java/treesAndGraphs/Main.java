@@ -8,8 +8,8 @@ public class Main {
     public static void main(String[] args) {
 //        TreeNode node = new TreeNode(1,  null, null);
 //        inOrder(node);
-        TreeNode node = new TreeNode(1, new TreeNode(2, null, null), new TreeNode(3, null, null));
-        inOrder2(node);
+        TreeNode node = new TreeNode(1, new TreeNode(2, null, null), new TreeNode(3, null, new TreeNode(4, null, null)));
+        inOrder(node);
     }
 
     public static class TreeNode {
@@ -36,11 +36,13 @@ public class Main {
                 current = current.left;
                 continue;
             }
-            current = stack.pop();
-            System.out.println(current.data);
-            current = current.right;
-            if (current != null) {
-                stack.push(current);
+            while (!stack.isEmpty()) {
+                current = stack.pop();
+                System.out.println(current.data);
+                current = current.right;
+                if (current != null) {
+                    stack.push(current);
+                }
             }
         } while (!stack.isEmpty());
     }
