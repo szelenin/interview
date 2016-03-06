@@ -49,10 +49,10 @@ public class TraverseIterable {
 
 
     public void preOrder(TreeNode root) {
-        path = preOrderIter2(root);
+        path = preOrderIter(root);
     }
 
-    private String preOrderIter(TreeNode node) {
+    public String preOrderIter(TreeNode node) {
         String result = "";
         Stack<TreeNode> stack = new Stack<>();
         stack.push(node);
@@ -101,5 +101,39 @@ public class TraverseIterable {
         result += preOrderValue(node.left);
         result += preOrderValue(node.right);
         return result;
+    }
+
+    public void postOrder(TreeNode root) {
+        path = postOrderValue(root);
+    }
+
+    public String postOrderIter(TreeNode node) {
+        String result = "";
+        Stack<TreeNode> postOrderStack =  new Stack<>();
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(node);
+        while (!stack.isEmpty()) {
+            node = stack.pop();
+            postOrderStack.push(node);
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+        }
+        while (!postOrderStack.isEmpty()) {
+            result += postOrderStack.pop();
+        }
+        return result;
+    }
+
+    public String postOrderValue(TreeNode node) {
+        if (node == null) {
+            return "";
+        }
+        String left = postOrderValue(node.left);
+        String right = postOrderValue(node.right);
+        return left + right + node;
     }
 }
