@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Created by szelenin on 2/19/2016.
  */
-public class LIS {
+public class FromGuy48 {
 
     public static List<Integer> lis(List<Integer> seq) {
         LinkedList<Integer>[] paths = new LinkedList[seq.size()];
