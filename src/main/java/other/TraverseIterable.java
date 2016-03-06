@@ -49,7 +49,7 @@ public class TraverseIterable {
 
 
     public void preOrder(TreeNode root) {
-        path = preOrderIter(root);
+        path = preOrderIter2(root);
     }
 
     private String preOrderIter(TreeNode node) {
@@ -70,6 +70,24 @@ public class TraverseIterable {
             if (node.right != null) {
                 node = node.right;
                 stack.push(node);
+            }
+        }
+        return result;
+    }
+
+    //this solution is taken from http://www.geeksforgeeks.org/iterative-preorder-traversal/
+    private String preOrderIter2(TreeNode node) {
+        String result = "";
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(node);
+        while (!stack.isEmpty()) {
+            node = stack.pop();
+            result += node;
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
             }
         }
         return result;
