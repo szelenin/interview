@@ -27,6 +27,13 @@ public class TraverseIterableTest {
     }
 
     @Test
+    public void shouldPreOrder() {
+        TraverseIterable treeTraverse = new TraverseIterable();
+        treeTraverse.preOrder(root);
+        assertEquals("FBADCEGIH", treeTraverse.path);
+    }
+
+    @Test
     public void shouldInOrder() {
         TraverseIterable treeTraverse = new TraverseIterable();
         treeTraverse.inOrder(root);

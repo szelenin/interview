@@ -48,4 +48,40 @@ public class TraverseIterable {
     }
 
 
+    public void preOrder(TreeNode root) {
+        path = preOrderIter(root);
+    }
+
+    private String preOrderIter(TreeNode node) {
+        String result = "";
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(node);
+        while (!stack.isEmpty()) {
+            result += node;
+            while (node.left != null) {
+                node = node.left;
+                result += node;
+                stack.push(node);
+            }
+            node = stack.pop();
+            while (node.right == null && !stack.isEmpty()) {
+                node = stack.pop();
+            }
+            if (node.right != null) {
+                node = node.right;
+                stack.push(node);
+            }
+        }
+        return result;
+    }
+
+    private String preOrderValue(TreeNode node) {
+        if (node == null) {
+            return "";
+        }
+        String result = node.name;
+        result += preOrderValue(node.left);
+        result += preOrderValue(node.right);
+        return result;
+    }
 }
