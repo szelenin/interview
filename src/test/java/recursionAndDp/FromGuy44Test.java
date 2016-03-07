@@ -27,7 +27,7 @@ public class FromGuy44Test {
             String path = new TraverseIterable().inorderIter(root);
             System.out.println("path = " + path);
         }
-        assertEquals(2, treeNodes.size());
+        assertEquals(5, treeNodes.size());
     }
 
 }
