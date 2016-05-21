@@ -171,8 +171,8 @@ public class RdpTask6 {
 
     public static List<String> addParent(int count) {
         ArrayList<String> result = new ArrayList<>();
-//        addParentIter(result, new char[count * 2], count, count, 0, count);
-        addParentIter(result, new char[count * 2], count, count, 0, 0);
+        addParent(result, new char[count * 2], count, count, 0, count);
+//        addParentIter(result, new char[count * 2], count, count, 0, 0);
         return result;
 //        return addParentIter(count);
     }

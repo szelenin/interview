@@ -52,6 +52,16 @@ public class TraverseIterableTest {
     }
 
     @Test
+    public void test(){
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+
+        TraverseIterable treeTraverse = new TraverseIterable();
+        assertEquals("213", treeTraverse.inorderIter(root));
+    }
+
+    @Test
     public void shouldPostOrder() {
         TraverseIterable treeTraverse = new TraverseIterable();
         assertEquals("ACEDBHIGF", treeTraverse.postOrderIter(root));
