@@ -14,11 +14,6 @@ public class FromGuy48LSPTest {
         assertEquals(-2.5 * 3.0 * (-5.0), FromGuy48LSP.MaxSubsequentProduct(array), 0.0001);
     }
 
-    @Test
-    public void test2(){
-        double[] array = new double[]{0.001, 2.5, 0.3, 3.0, -5.0, -1};
-        assertEquals(2.5 * 0.3 * 3.0 * -5.0 * -1, FromGuy48LSP.MaxSubsequentProduct(array), 0.0001);
-    }
 
     @Test
     public void test1(){
