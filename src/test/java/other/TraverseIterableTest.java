@@ -5,6 +5,8 @@ import org.junit.Test;
 import treesAndGraphs.TreeNode;
 import treesAndGraphs.TreeTraverse;
 
+import java.util.Stack;
+
 import static org.junit.Assert.*;
 
 /**
@@ -30,6 +32,29 @@ public class TraverseIterableTest {
     public void shouldPreOrder() {
         TraverseIterable treeTraverse = new TraverseIterable();
         assertEquals("FBADCEGIH", treeTraverse.preOrderIter(root));
+    }
+
+    @Test
+    public void shouldPreOrder2() {
+        TraverseIterable treeTraverse = new TraverseIterable();
+        assertEquals("FBADCEGIH", preOrderIter(root));
+    }
+
+    private String preOrderIter(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        String result = "";
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            result += node;
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
+        return result;
     }
 
     @Test
