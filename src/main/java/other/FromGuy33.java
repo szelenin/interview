@@ -46,7 +46,7 @@ public class FromGuy33 {
         int result = 0;
         for (int i = 0; i < chars.length; i++) {
             if (chars[i] == ' ') {
-                result ++;
+                result++;
             }
         }
         return result;
@@ -70,5 +70,55 @@ public class FromGuy33 {
             chars[j] = prev;
             prev = tmp;
         }
+    }
+
+    public static String reverseWords2(String sentence) {
+        char[] chars = sentence.toCharArray();
+        //Reverse whole string
+        reverse(0, chars.length - 1, chars);
+        //Reverse word by word
+        int lastWordEnd = 0;
+
+        while (lastWordEnd < chars.length - 1) {
+            int wordEnd = findWordEnd(lastWordEnd, chars);
+            reverse(lastWordEnd, wordEnd, chars);
+            lastWordEnd = wordEnd + 2;
+        }
+        return new String(chars);
+    }
+
+    private static void reverse(int from, int to, char[] chars) {
+        //Hello world
+        //dHello worl
+        //dlHello ..
+        for (int i = from; i <= to; i++) {
+            char last = chars[to];
+            shift(i, to, chars);
+            chars[i] = last;
+        }
+    }
+
+    private static void reverse2(int from, int to, char[] chars) {
+        //Hello world
+        //dHello worl
+        //dlHello ..
+        for (int i = from; i < to; i++) {
+            char last = chars[to];
+            shift(i, to, chars);
+            chars[i] = last;
+        }
+    }
+
+    private static int findWordEnd(int currentPosition, char[] chars) {
+        while (currentPosition < chars.length && chars[currentPosition] == ' ') {
+            currentPosition++;
+        }
+        for (; currentPosition < chars.length; currentPosition++) {
+            if (currentPosition > 0 && chars[currentPosition] == ' ') {
+                currentPosition--;
+                break;
+            }
+        }
+        return currentPosition == chars.length ? currentPosition - 1 : currentPosition;
     }
 }

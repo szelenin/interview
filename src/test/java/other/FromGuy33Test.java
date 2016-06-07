@@ -14,4 +14,10 @@ public class FromGuy33Test {
         assertEquals("here I'm Hi", FromGuy33.reverseWords("Hi I'm here"));
     }
 
+    @Test
+    public void test2(){
+        assertEquals("World Hello", FromGuy33.reverseWords2("Hello World"));
+        assertEquals("here I'm Hi", FromGuy33.reverseWords2("Hi I'm here"));
+    }
+
 }
