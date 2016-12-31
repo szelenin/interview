@@ -1,5 +1,7 @@
-package linkedLists;
+package fbcodelab;
 
+import fbcodelab.ListCycle;
+import fbcodelab.ListNode;
 import org.junit.Test;
 
 import java.util.HashMap;

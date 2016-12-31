@@ -1,4 +1,4 @@
-package linkedLists;
+package fbcodelab;
 
 /**
  * Created by Sergii_Zelenin on 12/29/2016.
