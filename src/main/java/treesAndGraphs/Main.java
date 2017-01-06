@@ -1,15 +1,16 @@
 package treesAndGraphs;
 
 import java.util.*;
+import java.util.stream.Collector;
 
 // This is the text editor interface.
 // Anything you type or change here will be seen by the other person in real time.
 public class Main {
     public static void main(String[] args) {
-//        TreeNode node = new TreeNode(1,  null, null);
-//        inOrder(node);
-        TreeNode node = new TreeNode(1, new TreeNode(2, null, null), new TreeNode(3, null, new TreeNode(4, null, null)));
-        inOrder(node);
+        List<Integer> integers = Arrays.asList(1, 2, 3);
+        Optional<Integer> sum = integers.stream().reduce((i1, i2) -> i1 + i2);
+        Integer integer = sum.get();
+        System.out.println("integer = " + integer);
     }
 
     public static class TreeNode {
