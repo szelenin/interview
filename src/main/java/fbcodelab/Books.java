@@ -13,18 +13,19 @@ public class Books {
         int start = 0;
         int booksAvailable = a.size() - b + 1;
         int endBooksIdx = start + booksAvailable;
-        int[][] cache = new int[a.size()][a.size()];
+        Map<Key, Integer> cache = new HashMap<>();
         return findMinMax(start, endBooksIdx, 0, b, a, cache);
     }
 
     //start - inclusive, end - exclusive
-    int findMinMax(int start, int end, int student, int maxStudents, List<Integer> books, int[][] cache) {
-        if (cache[start][end - 1] > 0) {
-            return cache[start][end - 1];
+    int findMinMax(int start, int end, int student, int maxStudents, List<Integer> books, Map<Key, Integer> cache) {
+        if (cache.containsKey(new Key(start, end))) {
+            return cache.get(new Key(start, end));
         }
         if (student == maxStudents - 1) {
-            cache[start][end - 1] = sum(start, end, books);
-            return cache[start][end - 1];
+            int sum = sum(start, end, books);
+            cache.put(new Key(start, end), sum);
+            return sum;
         }
         //current student can take N books starting from k position
         //sum(k..k+n) + findMinMax(available - n, student + 1) - find
@@ -36,7 +37,7 @@ public class Books {
             int max = Math.max(sum, findMinMax(i + 1, endBooksIdx, student + 1, maxStudents, books, cache));
             min = Math.min(min, max);
         }
-        cache[start][end - 1] = min;
+        cache.put(new Key(start, end), min);
         return min;
     }
 
@@ -49,42 +50,23 @@ public class Books {
         return sum;
     }
 
-    private int findMaxPages(List<List<Integer>> studentAlloc) {
-        int max = 0;
-        for (List<Integer> books : studentAlloc) {
-            Optional<Integer> sum = books.stream().reduce((i1, i2) -> i1 + i2);
-            max = Math.max(sum.get(), max);
-        }
-        return max;
-    }
+    private class Key {
+        private final int start;
+        private final int end;
 
-    private List<List<List<Integer>>> createBookAlloc(List<Integer> books, int total, Map<List<Integer>, List<List<List<Integer>>>> cache) {
-        if (cache.containsKey(books)) {
-            return cache.get(books);
+        public Key(int start, int end) {
+            this.start = start;
+            this.end = end;
         }
-        List<List<List<Integer>>> result = new ArrayList<>();
-        if (total == 1) {
-            List<List<Integer>> lastBooks = new ArrayList<>();
-            lastBooks.add(books);
-            result.add(lastBooks);
-            cache.put(books, result);
-            System.out.println("books" + books + ":" + result);
-            return result;
+
+        public int hashCode() {
+            return 31*start + end;
         }
-        List<Integer> availableForMe = books.subList(0, books.size() - total + 1);
-        for (int i = 1; i <= availableForMe.size(); i++) {
-            List<Integer> booksTaken = availableForMe.subList(0, i);
-            List<Integer> booksForOthers = books.subList(i, books.size());
-            List<List<List<Integer>>> othersDistribution = createBookAlloc(booksForOthers, total - 1, cache);
-            for (List<List<Integer>> others : othersDistribution) {
-                //others + booksTaken
-                List<List<Integer>> othersCopy = new ArrayList<>(others);
-                othersCopy.add(booksTaken);
-                result.add(othersCopy);
-            }
+
+        public boolean equals(Object o) {
+            Key k = (Key) o;
+            return k.start == start && k.end == end;
         }
-        cache.put(books, result);
-        System.out.println("books" + books + ":" + result);
-        return result;
+
     }
 }
