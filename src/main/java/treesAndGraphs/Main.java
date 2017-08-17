@@ -7,10 +7,8 @@ import java.util.stream.Collector;
 // Anything you type or change here will be seen by the other person in real time.
 public class Main {
     public static void main(String[] args) {
-        List<Integer> integers = Arrays.asList(1, 2, 3);
-        Optional<Integer> sum = integers.stream().reduce((i1, i2) -> i1 + i2);
-        Integer integer = sum.get();
-        System.out.println("integer = " + integer);
+        long a = 0b11000000000000000000000000000000L;
+        System.out.println("a = " + a);
     }
 
     public static class TreeNode {
