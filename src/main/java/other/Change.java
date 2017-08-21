@@ -24,4 +24,19 @@ public class Change {
         cache.put(amount, minChange);
         return minChange;
     }
+
+    public static int changeDp(int amount, int[] coins) {
+        int[] change = new int[amount + 1];
+        for (int i = 1; i <= amount; i++) {
+            int minChange = Integer.MAX_VALUE;
+            for (int coin : coins) {
+                if (i < coin) {
+                    continue;
+                }
+                minChange = Math.min(change[i - coin] + 1, minChange);
+            }
+            change[i] = minChange;
+        }
+        return change[amount];
+    }
 }

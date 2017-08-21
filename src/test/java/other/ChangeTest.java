@@ -18,4 +18,14 @@ public class ChangeTest {
         assertEquals(2, Change.change(40, new int[]{20, 10, 5, 1}));
     }
 
+    @Test(timeout = 1000)
+    public void testTimeoutDp(){
+        assertEquals(20, Change.changeDp(400, new int[]{20, 10, 5, 1}));
+    }
+
+    @Test
+    public void testDp(){
+        assertEquals(2, Change.changeDp(40, new int[]{20, 10, 5, 1}));
+    }
+
 }
