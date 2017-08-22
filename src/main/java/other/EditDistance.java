@@ -1,10 +1,55 @@
 package other;
 
+import java.util.Stack;
+
 /**
  * Created by Sergii_Zelenin on 8/22/2017.
  */
 public class EditDistance {
     public static int distance(String a, String b) {
+        return calculateDistanceArray(a, b)[a.length()][b.length()];
+    }
+
+    public static String[] backtracking(String a, String b) {
+        int[][] d = calculateDistanceArray(a, b);
+        Stack<Character> aStack = new Stack<>();
+        Stack<Character> bStack = new Stack<>();
+        backtrack(a, b, d, a.length(), b.length(), aStack, bStack);
+        return new String[]{toString(aStack), toString(bStack)};
+    }
+
+    private static String toString(Stack<Character> stack) {
+        StringBuilder sb = new StringBuilder();
+        while (!stack.isEmpty()) {
+            sb.append(stack.pop());
+        }
+        return sb.toString();
+    }
+
+    private static void backtrack(String a, String b, int[][] d, int i, int j, Stack<Character> aStack, Stack<Character> bStack) {
+        if (i == 0 && j == 0) {
+            return;
+        }
+        int current = d[i][j];
+        //if was insertion backtrack(..,i, j-1)
+        if (j > 0 && d[i][j - 1] < current) {
+            aStack.push('-');
+            bStack.push(b.charAt(j - 1));
+            backtrack(a, b, d, i, j - 1, aStack, bStack);
+        } else if (i > 0 && d[i - 1][j] < current) {//if deletion backtrack(..,i - 1, j,...)
+            aStack.push(a.charAt(i - 1));
+            bStack.push('-');
+            backtrack(a, b, d, i - 1, j, aStack, bStack);
+        } else if (i > 0 && j > 0) {
+            aStack.push(a.charAt(i - 1));
+            bStack.push(b.charAt(j - 1));
+            backtrack(a, b, d, i - 1, j - 1, aStack, bStack);
+        }
+        //if match/mismatch backtrack (..,i-1,j-1,..)
+
+    }
+
+    private static int[][] calculateDistanceArray(String a, String b) {
         //a[1..n], b[1...m]
         //d(i,j) - min distance of a(1..i) and b(1..j)
         //d(i,j) = min(insertion score,deletion score, match score, mismatch score)
@@ -33,6 +78,6 @@ public class EditDistance {
                 d[i][j] = Math.min(insertionScore, Math.min(deletionScore, matchScore));
             }
         }
-        return d[a.length()][b.length()];
+        return d;
     }
 }
