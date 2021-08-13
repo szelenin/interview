@@ -1,7 +1,5 @@
 package other;
 
-import org.junit.runner.manipulation.Sortable;
-
 import java.util.*;
 
 /**
